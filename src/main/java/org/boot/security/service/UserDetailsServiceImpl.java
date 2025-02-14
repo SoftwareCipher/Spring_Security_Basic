@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.boot.security.entity.User;
 import org.boot.security.exceptions.NoUsersFoundException;
 import org.boot.security.repository.UserRepository;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
@@ -14,15 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws NoUsersFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
-            throw new NoUsersFoundException(username);
+            throw new NoUsersFoundException("User isn't fount:" + username);
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),
-                user.getPassword(), List.of());
+
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getName());
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getUsername(),
+                user.getPassword(),
+                List.of(authority));
     }
 }
