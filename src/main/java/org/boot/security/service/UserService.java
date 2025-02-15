@@ -8,6 +8,7 @@ import org.boot.security.entity.User;
 import org.boot.security.exceptions.NoUsersFoundException;
 import org.boot.security.repository.RoleRepository;
 import org.boot.security.repository.UserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.tinylog.Logger;
@@ -19,6 +20,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional
     public void saveWithRole(UserDTO dto) {
@@ -26,7 +28,7 @@ public class UserService {
                 .orElseThrow(() -> new NullPointerException("Role not found with name: " + dto.getRole().getName()));
         User user = new User();
         user.setUsername(dto.getName());
-        user.setPassword(dto.getPassword());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
         user.setRole(role);
 
         userRepository.save(user);

@@ -17,6 +17,10 @@ VALUES ((select r.id from roles r where r.name = 'ADMIN'),
        ((select r.id from roles r where r.name = 'USER'),
         (select p.id from permissions p where p.name = 'READ'));
 
+--password 123456789
+INSERT INTO users (username, password, role_id)
+VALUES ('admin', '$2a$10$QqBL6O/DQDbdqwcAzcVUE.p9B2tJQXb6i9E9iFhAkOc2C9T/H6PPC',
+                                                        (select r.id from roles r where r.name = 'ADMIN'));
 
 -- INSERT INTO users (username, password, role_id)
 -- SELECT
