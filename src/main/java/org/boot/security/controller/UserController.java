@@ -18,7 +18,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/save")
-    public ResponseEntity<UserDTO> save(@RequestBody UserDTO user) {
+    public ResponseEntity<UserDTO> save(@ModelAttribute UserDTO user) {
         Logger.info("save user: " + user);
         userService.saveWithRole(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
