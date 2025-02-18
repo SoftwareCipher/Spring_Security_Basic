@@ -25,16 +25,16 @@ public class UserController {
     }
 
     //username and role
-    @GetMapping("/user/all")
-    @PreAuthorize(value = "hasRole('USER')")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin/users")
     public ResponseEntity<List<UserDTO>> getAll() {
         Logger.info("get all users");
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     //get user by role
-    @GetMapping("/admin/roles/{role}")
-    @PreAuthorize(value = "hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("admin/roles/{role}")
     public ResponseEntity<List<UserDTO>> getRoles(@PathVariable String role) {
         Logger.info("get role: " + role);
         return ResponseEntity.ok(userService.getUsersByRole(role));

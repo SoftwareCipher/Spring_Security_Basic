@@ -1,5 +1,7 @@
 package org.boot.security.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,8 +13,9 @@ import org.boot.security.entity.User;
 @NoArgsConstructor
 public class UserDTO {
     private int id;
+
+    @NotBlank(message = "Name may not be blank")
     private String name;
-    //TODO
     private String password;
     private RoleDTO role;
 
