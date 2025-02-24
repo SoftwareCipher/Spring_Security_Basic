@@ -52,7 +52,7 @@ public class LoginController {
             return "/save";
         }
         userService.saveWithRole(userDTO);
-       redirectAttributes.addFlashAttribute("userDTO", userDTO.getName());
+        redirectAttributes.addFlashAttribute("userDTO", userDTO.getName());
         return "redirect:/";
     }
 
