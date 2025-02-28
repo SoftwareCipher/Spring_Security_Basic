@@ -25,7 +25,7 @@ public class UserController {
     }
 
     //username and role
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/admin/users")
     public ResponseEntity<List<UserDTO>> getAll() {
         Logger.info("get all users");
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     //get user by role
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("admin/roles/{role}")
     public ResponseEntity<List<UserDTO>> getRoles(@PathVariable String role) {
         Logger.info("get role: " + role);
