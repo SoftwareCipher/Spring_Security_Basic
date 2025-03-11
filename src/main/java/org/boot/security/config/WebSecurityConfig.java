@@ -21,6 +21,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/save", "/error", "/").permitAll()
                         .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/swagger-ui.html").hasRole("ADMIN")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form

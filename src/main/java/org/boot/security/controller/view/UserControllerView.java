@@ -1,5 +1,7 @@
 package org.boot.security.controller.view;
 
+import io.swagger.v3.oas.annotations.*;
+import io.swagger.v3.oas.annotations.responses.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.boot.security.dto.UserDTO;
@@ -28,6 +30,12 @@ public class UserControllerView {
         return "save";
     }
 
+    @Operation(
+            summary = "save user",
+            description = "save new user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation")
+    })
     @PostMapping("/save")
     public String save(@Valid UserDTO userDTO,
                        BindingResult bindingResult,
