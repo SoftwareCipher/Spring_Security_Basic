@@ -41,4 +41,9 @@ public class UserDTO {
         this.name = name;
         this.password = password;
     }
+
+    public UserDTO(String name, String password) {
+        this.name = name;
+        this.password = password;
+    }
 }
