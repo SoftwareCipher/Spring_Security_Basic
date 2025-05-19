@@ -54,7 +54,6 @@ public class UserControllerView {
         return "redirect:/";
     }
 
-
     @GetMapping("/users")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String showAllUsers(Model model) {
